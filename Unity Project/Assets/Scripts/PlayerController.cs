@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
         if (isGroundedBool)
         {
-            canDoubleJump = true; // Reset double jump when grounded
+            canDoubleJump = true; 
 
             if (controlmode == Controls.pc)
             {
@@ -82,24 +82,22 @@ public class PlayerController : MonoBehaviour
             if (canDoubleJump && Input.GetButtonDown("Jump"))
             {
                 Jump(doubleJumpForce);
-                canDoubleJump = false; // Disable double jump until grounded again
+                canDoubleJump = false;
             }
         }
 
         if (!isPaused)
         {
-            // Calculate rotation angle based on mouse position
+            
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 lookDirection = mousePosition - transform.position;
             float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
 
-            // ... (your existing code for rotation)
-
-            // Handle shooting
+           
             if (controlmode == Controls.pc && Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
             {
                 Shoot();
-                nextFireTime = Time.time + 1f / fireRate; // Set the next allowed fire time
+                nextFireTime = Time.time + 1f / fireRate; 
             }
         }
         SetAnimations();
@@ -109,7 +107,7 @@ public class PlayerController : MonoBehaviour
             FlipSprite(moveX);
         }
 
-        //impactEffect
+       
 
         
 
@@ -136,18 +134,18 @@ public class PlayerController : MonoBehaviour
     {
         if (direction > 0)
         {
-            // Moving right, flip sprite to the right
+            
             transform.localScale = new Vector3(1, 1, 1);
         }
         else if (direction < 0)
         {
-            // Moving left, flip sprite to the left
+           
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }
     private void FixedUpdate()
     {
-        // Player movement
+       
         if (controlmode == Controls.pc)
         {
             moveX = Input.GetAxis("Horizontal");
@@ -160,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(float jumpForce)
     {
-        rb.velocity = new Vector2(rb.velocity.x, 0); // Zero out vertical velocity
+        rb.velocity = new Vector2(rb.velocity.x, 0); 
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         
     }
